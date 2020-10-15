@@ -40,7 +40,7 @@ import com.facebook.react.bridge.Callback;
 
 public class RCTAes extends ReactContextBaseJavaModule {
 
-    private static final String CIPHER_ALGORITHM = "AES/CBC/PKCS7Padding";
+    private static final String CIPHER_ALGORITHM = "AES/CBC/NoPadding";
     public static final String HMAC_SHA_256 = "HmacSHA256";
     private static final String KEY_ALGORITHM = "AES";
 
@@ -54,7 +54,7 @@ public class RCTAes extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void encrypt(String data, String key, String iv, Promise promise) {
+    public void encrypt(String data, String key, String iv, String algorithm, Promise promise) {
         try {
             String result = encrypt(data, key, iv);
             promise.resolve(result);
@@ -64,7 +64,7 @@ public class RCTAes extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void decrypt(String data, String pwd, String iv, Promise promise) {
+    public void decrypt(String data, String pwd, String iv, String algorithm, Promise promise) {
         try {
             String strs = decrypt(data, pwd, iv);
             promise.resolve(strs);
