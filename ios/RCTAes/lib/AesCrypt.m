@@ -69,7 +69,7 @@
     NSData *ivData = [self fromHex:iv];
     //    NSData *keyData = [key dataUsingEncoding:NSUTF8StringEncoding];
     size_t numBytes = 0;
-    
+
     NSArray *aesAlgorithms = @[@"aes-128-cbc", @"aes-192-cbc", @"aes-256-cbc"];
     size_t item = [aesAlgorithms indexOfObject:algorithm];
     size_t keyLength;
@@ -90,7 +90,7 @@
     CCCryptorStatus cryptStatus = CCCrypt(
                                           [operation isEqualToString:@"encrypt"] ? kCCEncrypt : kCCDecrypt,
                                           kCCAlgorithmAES,
-                                          kCCOptionPKCS7Padding,
+                                          0,
                                           keyData.bytes, keyLength,
                                           ivData.length ? ivData.bytes : nil,
                                           data.bytes, data.length,
